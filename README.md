@@ -1,0 +1,1 @@
+# wp-emoji-db-update
