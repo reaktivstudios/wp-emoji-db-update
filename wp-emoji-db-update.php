@@ -67,10 +67,13 @@ class WP_Emoji_DB_Update
 		// do our version check first
 		if ( false === $wpvers = self::check_wp_version() ) {
 
+			// get my update page link
+			$update = admin_url( 'update-core.php' );
+
 			// render the page
 			echo '<div class="wrap">';
 			echo '<h2>' . esc_html( get_admin_page_title() ) . '</h2>';
-			echo '<p>' . __( 'You must be running version 4.2.2 or greater. Please update your WordPress installation', 'wp-emoji-db-update' ) . '</p>';
+			echo '<p>' . sprintf( __( 'You must be running version 4.2.2 or greater. Please update your WordPress installation. <a href="%s">Click here to update</a>', 'wp-emoji-db-update' ), esc_url( $update ) ) . '</p>';
 			echo '</div>';
 
 			// and bail
