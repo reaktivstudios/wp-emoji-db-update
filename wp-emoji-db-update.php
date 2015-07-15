@@ -97,14 +97,23 @@ class WP_Emoji_DB_Update
 				echo self::get_update_page( $check );
 			}
 
-			// it's run, and it worked
-			if ( ! empty( $hasrun ) && ! empty( $check['done'] ) ) {
-				echo '<p>' . __( 'Success! Your site has been updated to support emoji.', 'wp-emoji-db-update' ) . '&nbsp;<span style="font-size:120%;">&#128077;</span></p>';
-			}
+			// it's run, so do our checks
+			if ( ! empty( $hasrun ) ) {
 
-			// it's run, and it didnt work
-			if ( ! empty( $hasrun ) && ! empty( $check['fail'] ) ) {
-				echo '<p>' . __( 'The site was updated, but there was an error. Please contact your host.', 'wp-emoji-db-update' ) . '&nbsp;<span style="font-size:120%;">&#128077;</span></p>';
+				// it worked
+				if ( ! empty( $check['done'] ) ) {
+					echo '<p>' . __( 'Success! Your site has been updated to support emoji.', 'wp-emoji-db-update' ) . '&nbsp;<span style="font-size:120%;">&#128077;</span></p>';
+				}
+
+				// it's run, and it didnt work
+				if ( ! empty( $check['fail'] ) ) {
+					echo '<p>' . __( 'The site was updated, but there was an error. Please contact your host.', 'wp-emoji-db-update' ) . '</p>';
+				}
+
+				// update run but something didn't take
+				if ( empty( $check['done'] ) && ! empty( $check['check'] ) ) {
+					echo '<p>' . __( 'The site was updated, but there is an unrelated issue preventing it. Please contact your host.', 'wp-emoji-db-update' ) . '</p>';
+				}
 			}
 
 		// close the wrap
